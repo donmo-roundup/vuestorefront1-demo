@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div class="donmo-header">
+      <a href="https://donmo.org" target="_blank">Donmo Vue Storefront Demo</a>
+    </div>
+
     <component :is="layout">
       <router-view />
     </component>
@@ -59,6 +63,16 @@ export default {
 <style lang="scss" src="theme/css/main.scss"></style>
 <style lang="scss">
 @import "~@storefront-ui/shared/styles/helpers/breakpoints";
+
+.donmo-header {
+  background-color: #f6c728;
+  padding: 5px;
+}
+.donmo-header a {
+  color: #005cb3;
+  font-weight: bold;
+}
+
 body {
   --overlay-z-index: 1;
   --sidebar-aside-z-index: 2;
