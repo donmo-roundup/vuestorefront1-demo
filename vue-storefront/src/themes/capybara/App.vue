@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import get from 'lodash-es/get'
-import DefaultLayout from './layouts/Default'
-import MinimalLayout from './layouts/Minimal'
+import get from "lodash-es/get";
+import DefaultLayout from "./layouts/Default";
+import MinimalLayout from "./layouts/Minimal";
 
 export default {
   components: {
@@ -17,9 +17,41 @@ export default {
     MinimalLayout
   },
   computed: {
-    layout () {
-      return `${get(this.$route, 'meta.layout', 'default')}-layout`
+    layout() {
+      return `${get(this.$route, "meta.layout", "default")}-layout`;
     }
+  },
+
+  async mounted() {
+    const shippinDetails = {
+      firstName: "Vanessa",
+      lastName: "Puccini",
+      emailAddress: "vanessapuccini@donmo.org",
+      zipCode: 12345678,
+      country: "US",
+      phoneNumber: 12345678,
+      state: "CA",
+      streetAddress: "123 Kettner Boulevard",
+      city: "San Diego",
+      apartmentNumber: 2
+    };
+    const product = await this.$store.dispatch("product/single", {
+      options: { sku: "24-MB01" }
+    });
+    console.log("product is", product);
+    this.$store.dispatch("cart/addItem", { productToAdd: product });
+
+    this.$store.dispatch("checkout/savePersonalDetails", {
+      firstName: "Vanessa",
+      lastName: "Puccini",
+      emailAddress: "vanessapuccini@donmo.org"
+    });
+
+    this.$store.dispatch("checkout/saveShippingDetails", shippinDetails);
+    this.$store.dispatch("checkout/savePaymentDetails", {
+      ...shippinDetails,
+      paymentMethod: "checkmo"
+    });
   }
 };
 </script>
