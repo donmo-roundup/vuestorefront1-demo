@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div class="donmo-header">
-      <a href="https://donmo.org" target="_blank">Donmo Vue Storefront Demo</a>
+      <a href="https://donmo.org" target="_blank"
+        >Donmo Vue Storefront 1 Demo</a
+      >
     </div>
 
     <component :is="layout">
