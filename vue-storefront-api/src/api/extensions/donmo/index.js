@@ -40,9 +40,6 @@ module.exports = ({ config, db }) => {
       };
       return module;
     });
-    console.log("token is", getToken(req));
-    console.log("cart id is", req.query.cartId);
-    console.log("donation is", req.body.donationAmount);
     client.donmo
       .addDonation(getToken(req), req.query.cartId, req.body.donationAmount)
       .then((result) => {
@@ -59,7 +56,6 @@ module.exports = ({ config, db }) => {
       var module = {};
 
       module.removeDonation = function (customerToken, cartId) {
-        console.log("remove cartId is", cartId);
         if (customerToken && isNumeric(cartId)) {
           return restClient.delete(
             "/carts/mine/remove_donmo_donation",
