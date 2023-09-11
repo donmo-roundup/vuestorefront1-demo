@@ -31,10 +31,6 @@ export default {
     },
     language: {
       type: String
-    },
-    isBackendBased: {
-      type: Boolean,
-      default: true
     }
   },
 
@@ -111,7 +107,6 @@ export default {
         elementId: this.elementId,
         currency: currentStoreView().i18n.currencyCode,
         language: currentStoreView().i18n.defaultLanguage.toLocaleLowerCase(),
-        isBackendBased: false,
         orderId: this.$store.state.cart.cartServerToken,
         getExistingDonation: () => this.prices.donmodonation,
         addDonationAction,
