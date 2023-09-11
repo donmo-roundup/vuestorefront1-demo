@@ -111,7 +111,7 @@ export default {
         elementId: this.elementId,
         currency: currentStoreView().i18n.currencyCode,
         language: currentStoreView().i18n.defaultLanguage.toLocaleLowerCase(),
-        isBackendBased: true,
+        isBackendBased: false,
         orderId: this.$store.state.cart.cartServerToken,
         getExistingDonation: () => this.prices.donmodonation,
         addDonationAction,
@@ -121,11 +121,7 @@ export default {
       this.donmo.build();
     };
 
-    // donmoScript.setAttribute("src", "https://static.donmo.org/integration.js");
-    donmoScript.setAttribute(
-      "src",
-      "http://localhost:4001/static/integration.js"
-    );
+    donmoScript.setAttribute("src", "https://static.donmo.org/integration.js");
   }
 };
 </script>

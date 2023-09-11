@@ -4,7 +4,7 @@
       <div class="checkout__main">
         <SfSteps
           :active="currentStep"
-          :steps="steps.map((step) => step.name)"
+          :steps="steps.map(step => step.name)"
           @change="changeStep"
         >
           <SfStep v-for="step in steps" :key="step.key" :name="step.name">
@@ -40,19 +40,19 @@
   </div>
 </template>
 <script>
-import Checkout from '@vue-storefront/core/pages/Checkout'
-import { SfSteps } from '@storefront-ui/vue'
-import OPayment from 'theme/components/organisms/o-payment'
-import OShipping from 'theme/components/organisms/o-shipping'
-import OConfirmOrder from 'theme/components/organisms/o-confirm-order'
-import OOrderReview from 'theme/components/organisms/o-order-review'
-import OOrderSummary from 'theme/components/organisms/o-order-summary'
-import OOrderConfirmation from 'theme/components/organisms/o-order-confirmation'
-import OPersonalDetails from 'theme/components/organisms/o-personal-details'
-import DonmoRoundup from 'theme/components/organisms/donmo-roundup.vue'
+import Checkout from "@vue-storefront/core/pages/Checkout";
+import { SfSteps } from "@storefront-ui/vue";
+import OPayment from "theme/components/organisms/o-payment";
+import OShipping from "theme/components/organisms/o-shipping";
+import OConfirmOrder from "theme/components/organisms/o-confirm-order";
+import OOrderReview from "theme/components/organisms/o-order-review";
+import OOrderSummary from "theme/components/organisms/o-order-summary";
+import OOrderConfirmation from "theme/components/organisms/o-order-confirmation";
+import OPersonalDetails from "theme/components/organisms/o-personal-details";
+import DonmoRoundup from "theme/components/organisms/donmo-roundup.vue";
 
 export default {
-  name: 'Checkout',
+  name: "Checkout",
   components: {
     SfSteps,
     OPayment,
@@ -62,94 +62,94 @@ export default {
     OConfirmOrder,
     OPersonalDetails,
     OOrderConfirmation,
-    DonmoRoundup,
+    DonmoRoundup
   },
   mixins: [Checkout],
   data() {
     return {
       steps: [
         {
-          key: 'personalDetails',
-          name: this.$t('Details'),
-          component: OPersonalDetails,
+          key: "personalDetails",
+          name: this.$t("Details"),
+          component: OPersonalDetails
         },
         {
-          key: 'shipping',
-          name: this.$t('Shipping'),
-          component: OShipping,
+          key: "shipping",
+          name: this.$t("Shipping"),
+          component: OShipping
         },
         {
-          key: 'payment',
-          name: this.$t('Payment'),
-          component: OPayment,
+          key: "payment",
+          name: this.$t("Payment"),
+          component: OPayment
         },
         {
-          key: 'orderReview',
-          name: this.$t('Review'),
-          component: OConfirmOrder,
-        },
-      ],
-    }
+          key: "orderReview",
+          name: this.$t("Review"),
+          component: OConfirmOrder
+        }
+      ]
+    };
   },
   computed: {
     currentStep() {
-      return this.steps.findIndex((step) => this.activeSection[step.key])
-    },
+      return this.steps.findIndex(step => this.activeSection[step.key]);
+    }
   },
   methods: {
     changeStep(nextStep) {
       if (nextStep < this.currentStep) {
-        this.$bus.$emit('checkout-before-edit', this.steps[nextStep].key)
+        this.$bus.$emit("checkout-before-edit", this.steps[nextStep].key);
       }
     },
     showNotification({ type, message }) {
-      this.$store.dispatch('notification/spawnNotification', {
+      this.$store.dispatch("notification/spawnNotification", {
         type,
         message,
-        action1: { label: this.$t('OK') },
-      })
+        action1: { label: this.$t("OK") }
+      });
     },
     notifyEmptyCart() {
       this.showNotification({
-        type: 'warning',
+        type: "warning",
         message: this.$t(
-          'Shopping cart is empty. Please add some products before entering Checkout'
-        ),
-      })
+          "Shopping cart is empty. Please add some products before entering Checkout"
+        )
+      });
     },
     notifyOutStock(p) {
       this.showNotification({
-        type: 'danger',
-        message: p.name + this.$t(' is out of stock!'),
-      })
+        type: "danger",
+        message: p.name + this.$t(" is out of stock!")
+      });
     },
     notifyNotAvailable() {
       this.showNotification({
-        type: 'danger',
-        message: this.$t('Some of the ordered products are not available!'),
-      })
+        type: "danger",
+        message: this.$t("Some of the ordered products are not available!")
+      });
     },
     notifyStockCheck() {
       this.showNotification({
-        type: 'warning',
+        type: "warning",
         message: this.$t(
-          'Stock check in progress, please wait while available stock quantities are checked'
-        ),
-      })
+          "Stock check in progress, please wait while available stock quantities are checked"
+        )
+      });
     },
     notifyNoConnection() {
       this.showNotification({
-        type: 'warning',
+        type: "warning",
         message: this.$t(
-          'There is no Internet connection. You can still place your order. We will notify you if any of ordered products is not available because we cannot check it right now.'
-        ),
-      })
-    },
-  },
-}
+          "There is no Internet connection. You can still place your order. We will notify you if any of ordered products is not available because we cannot check it right now."
+        )
+      });
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
-@import '~@storefront-ui/shared/styles/helpers/breakpoints';
+@import "~@storefront-ui/shared/styles/helpers/breakpoints";
 
 #checkout {
   box-sizing: border-box;
